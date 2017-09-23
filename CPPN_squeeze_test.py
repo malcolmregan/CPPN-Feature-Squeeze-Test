@@ -98,7 +98,7 @@ print('Noise Classification: {:.2f}%').format(float(noise_classification)*100/nu
 
 print('')
 print("Testing model on median filtered CPPN examples...")
-median_param = 50
+median_param = 10
 same_classification = 0
 new_classification_not_noise = 0
 no_classification = 0
@@ -138,7 +138,7 @@ for i in range(np.shape(CPPN_examples)[0]):
     example = CPPN_examples[i:i+1,:,:,:,0]
     if example[0,0,0,:]!=bad_example_marker:
         target = np.where(CPPN_examples[i,0,0,0,:]==1)[0][0]
-        example = reduce_precision_np(example,precision_param)
+        example = reduce_precision_np(binary_filter_np(example),precision_param)
         pred = predictions.eval(session=sess, feed_dict={x: example})[0]
         most_likely_class = np.argmax(pred)
         if pred[most_likely_class]>=0.85:
@@ -173,7 +173,7 @@ for num, i in enumerate(random_examples):
             example = CPPN_examples[random_examples[num]:random_examples[num]+1,:,:,:,0]
     binary = binary_filter_np(example)
     median = median_filter_np(example,median_param)
-    reduced_precision = reduce_precision_np(example,precision_param)
+    reduced_precision = reduce_precision_np(binary,precision_param)
     ax[num*4] = fig.add_subplot(np.shape(random_examples)[0], 4, num*4+1, aspect='equal')
     ax[num*4].imshow(example[0,:,:,0], cmap='gray_r', interpolation='nearest')
     ax[num*4].axes.get_xaxis().set_visible(False)
