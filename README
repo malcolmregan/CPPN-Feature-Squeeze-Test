@@ -2,8 +2,7 @@ dependencies:
 tensoflow==1.2.1
 keras==2.0.3
 
-checkpoint.h5 is a model trained on ~8000 CPPN examples 
-so, it has an established noise class.
+checkpoint.h5 is a model trained on MNIST and ~8000 CPPN examples. So, it has an established noise class.
 
 the examples in CPPN_data/ are CPPN examples generated to trick the checkpoint.h5 model
 
