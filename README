@@ -1,3 +1,7 @@
+dependencies:
+tensoflow==1.2.1
+keras==2.0.3
+
 checkpoint.h5 is a model trained on ~8000 CPPN examples 
 so, it has an established noise class.
 
