@@ -1,0 +1,16 @@
+checkpoint.h5 is a model trained on ~8000 CPPN examples 
+so, it has an established noise class.
+
+the examples in CPPN_data/ are CPPN examples generated to trick the checkpoint.h5 model
+
+CPPN_squeeze_test.py 
+    - loads the model checkpoint
+    - tests model accuracy on CPPN examples w.r.t. trick class (should be 100% - i.e. all CPPN examples trick the model)
+    - tests model with filtered CPPN data using filters from feature squeeze experiment
+        finds percent of examples:
+	    - still classified as trick class (Indicating it doesn't work)
+            - classified as another class (>=80% probablity) (Indicating it doesn't reallly work)
+            - cause output of low probablity (for different definitions of 'low' 70 <= prob < 80, 60 <= prob < 70, etc.) across all classes (Indicating it kind of works)
+            - classified as noise (class 10) (Indicating it works very well)
+
+squeeze.py contains the filters from feature squeezing experiment
